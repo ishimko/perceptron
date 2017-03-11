@@ -1,12 +1,18 @@
 from perceptron import Perceptron
 
+#  Plain
+LEFT = -5
+RIGHT = 5
+BOTTOM = -5
+TOP = 5
 
-CLASSES_COUNT = 3
+CLASSES_COUNT = 4
 VECTOR_SIZE = 2
 TRAIN_DATA = [
-    ([0, 0], 0),
-    ([1, 1], 1),
-    ([-1, 1], 2)
+    ([RIGHT, TOP], 0),
+    ([LEFT, TOP], 1),
+    ([LEFT, BOTTOM], 2),
+    ([RIGHT, BOTTOM], 3)
 ]
 
 if __name__ == '__main__':
