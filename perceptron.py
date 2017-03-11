@@ -33,7 +33,9 @@ class Perceptron:
                 else:
                     print('good boy')
                 print(self.functions_weights)
-    
+        print('Done!')
+        print('Weights are: {}'.format(self.functions_weights))
+
     def get_class(self, vector):
         pass
 
