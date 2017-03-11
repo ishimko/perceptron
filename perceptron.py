@@ -25,7 +25,8 @@ class Perceptron:
                     print('bad boy')
                     errors = True
                     punishment = self.COEFFICIENT * vector.transpose()
-                    self.functions_weights[expected_class] = self.functions_weights[expected_class] + punishment
+                    new_weights = self.functions_weights[expected_class] + punishment
+                    self.functions_weights[expected_class] = new_weights
                     for i in range(len(self.functions_weights)):
                         if i != expected_class:
                             if functions_results[i] >= functions_results[expected_class]:
