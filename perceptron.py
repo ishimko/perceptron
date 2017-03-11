@@ -38,7 +38,9 @@ class Perceptron:
         print('Weights are: {}'.format(self.functions_weights))
 
     def get_class(self, vector):
-        pass
+        vector = np.matrix(self._add_bias(vector))
+        results = self._get_separating_functions_results(vector)
+        return max(enumerate(results), key=lambda x: x[1])[0]
 
     def save_weights(self):
         pass
