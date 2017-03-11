@@ -11,21 +11,28 @@ class Perceptron:
         self.vector_size = vector_size
 
     def train(self, sample):
-        for vector, expected_class in sample:
-            assert len(vector) == self.vector_size
-            vector = np.matrix(self._add_bias(vector))
-            functions_results = self._get_separating_functions_results(vector)
-            if not self._is_true_max(expected_class, functions_results):
-                print('bad boy')
-                punishment = self.COEFFICIENT * vector.transpose()
-                self.functions_weights[expected_class] = self.functions_weights[expected_class] + punishment
-                for i in range(len(self.functions_weights)):
-                    if i != expected_class:
-                        if functions_results[i] >= functions_results[expected_class]:
-                            self.functions_weights[i] = self.functions_weights[i] - punishment
-            else:
-                print('good boy')
-            print(self.functions_weights)
+        step = 0
+        errors = True
+        while errors:
+            step += 1
+            errors = False
+            print('step {}'.format(step))
+            for vector, expected_class in sample:
+                assert len(vector) == self.vector_size
+                vector = np.matrix(self._add_bias(vector))
+                functions_results = self._get_separating_functions_results(vector)
+                if not self._is_true_max(expected_class, functions_results):
+                    print('bad boy')
+                    errors = True
+                    punishment = self.COEFFICIENT * vector.transpose()
+                    self.functions_weights[expected_class] = self.functions_weights[expected_class] + punishment
+                    for i in range(len(self.functions_weights)):
+                        if i != expected_class:
+                            if functions_results[i] >= functions_results[expected_class]:
+                                self.functions_weights[i] = self.functions_weights[i] - punishment
+                else:
+                    print('good boy')
+                print(self.functions_weights)
     
     def get_class(self, vector):
         pass
@@ -47,7 +54,5 @@ class Perceptron:
 
     def _is_true_max(self, expected_class, functions_results):
         expected_max = functions_results[expected_class]
-        return all([x < expected_max and i != expected_class for i, x in enumerate(functions_results)])
-    
-    # def _punish(self, functions_results, vector):
-        
+        others = [x for i, x in enumerate(functions_results) if i != expected_class]
+        return all([x < expected_max for x in others])
