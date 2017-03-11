@@ -1,4 +1,6 @@
+from collections import defaultdict
 from perceptron import Perceptron
+from drawer import display_result
 
 #  Plain
 LEFT = -5
@@ -18,5 +20,8 @@ TRAIN_DATA = [
 if __name__ == '__main__':
     perceptron = Perceptron(CLASSES_COUNT, VECTOR_SIZE)
     perceptron.train(TRAIN_DATA)
-    result = perceptron.get_class(TRAIN_DATA[2][0])
-    print(result)
+    result = defaultdict(list)
+    for v in TRAIN_DATA:
+        vector = v[0]
+        result[perceptron.get_class(vector)].append(vector)
+    display_result(result)
