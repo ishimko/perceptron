@@ -1,10 +1,14 @@
 from perceptron import Perceptron
 
+
+CLASSES_COUNT = 3
+VECTOR_SIZE = 2
+TRAIN_DATA = [
+    ([0, 0], 0),
+    ([1, 1], 1),
+    ([-1, 1], 2)
+]
+
 if __name__ == '__main__':
-    perceptron = Perceptron(3, 2)
-    train_data = [
-        ([0, 0], 0),
-        ([1, 1], 1),
-        ([-1, 1], 2)
-    ]
-    perceptron.train(train_data)
+    perceptron = Perceptron(CLASSES_COUNT, VECTOR_SIZE)
+    perceptron.train(TRAIN_DATA)
