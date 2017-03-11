@@ -18,3 +18,5 @@ TRAIN_DATA = [
 if __name__ == '__main__':
     perceptron = Perceptron(CLASSES_COUNT, VECTOR_SIZE)
     perceptron.train(TRAIN_DATA)
+    result = perceptron.get_class(TRAIN_DATA[2][0])
+    print(result)
