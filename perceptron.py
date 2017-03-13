@@ -12,19 +12,19 @@ class Perceptron:
             for vector, expected_result in training_data:
                 assert len(vector) == self.sensors_count
                 vector = np.array(self._add_bias(vector))
-                actual_result = self._get_decision_result(vector)
+                actual_result = self._get_decision_internal(vector)
                 punishment = (expected_result - actual_result) * vector * self.COEFFICIENT
                 self.weights = self.weights + punishment
 
-    def get_class(self, vector):
+    def get_decision(self, vector):
         assert len(vector) == self.sensors_count
         vector = np.array(self._add_bias(vector))
-        return self._get_decision_result(vector)
+        return bool(self._get_decision_internal(vector))
 
     def _add_bias(self, vector):
         return vector + [self.BIAS_VALUE]
 
-    def _get_decision_result(self, vector):
+    def _get_decision_internal(self, vector):
         return self._unit_step(np.dot(vector, self.weights))
 
     @staticmethod

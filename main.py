@@ -1,33 +1,20 @@
 from perceptron import Perceptron
+import digit_example
+import and_example
+import or_example
 
-TRAINING_DATA = [
-    (list('111101101101111'), 0),
-    (list('001001001001001'), 0),
-    (list('111001111100111'), 0),
-    (list('111001111001111'), 0),
-    (list('101101111001001'), 0),
-    (list('111100111001111'), 1),
-    (list('111100111101111'), 0),
-    (list('111001001001001'), 0),
-    (list('111101111101111'), 0),
-    (list('111101111001111'), 0)
-]
+TRAINING_ITERS_COUNT = 5
 
-TEST = [
-    list('111100111000111'),
-    list('111100010001111'),
-    list('111100011001111'),
-    list('110100111001111'),
-    list('110100111001011'),
-    list('111100101001111')
-]
-
-TRAINING_ITERS_COUNT = 3
+def show_example(training_data, test_data, example_name):
+    print('#### {} ####'.format(example_name))
+    perceptron = Perceptron(training_data, TRAINING_ITERS_COUNT)
+    print('weights after training: {}'.format(perceptron.weights))
+    print('Test data:')
+    for test_vector in test_data:
+        print('{}: {}'.format(test_vector, perceptron.get_decision(test_vector)))
+    print('\n')
 
 if __name__ == '__main__':
-    TRAINING_DATA = [(list(map(int, l)), result) for l, result in TRAINING_DATA]
-    perceptron = Perceptron(TRAINING_DATA, TRAINING_ITERS_COUNT)
-    TEST = [list(map(int, x)) for x in TEST]
-    for x in TEST:
-        print('{}'.format(perceptron.get_class(x)))
-    print('weights: {}'.format(perceptron.weights))
+    show_example(digit_example.TRAINING_DATA, digit_example.TEST_DATA, digit_example.EXAMPLE_NAME)
+    show_example(and_example.TRAINING_DATA, and_example.TEST_DATA, and_example.EXAMPLE_NAME)
+    show_example(or_example.TRAINING_DATA, or_example.TEST_DATA, or_example.EXAMPLE_NAME)
