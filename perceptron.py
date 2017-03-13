@@ -11,18 +11,14 @@ class Perceptron:
         self.vector_size = vector_size
 
     def train(self, sample):
-        step = 0
         errors = True
         while errors:
-            step += 1
             errors = False
-            print('step {}'.format(step))
             for vector, expected_class in sample:
                 assert len(vector) == self.vector_size
                 vector = np.matrix(self._add_bias(vector))
                 functions_results = self._get_separating_functions_results(vector)
                 if not self._is_true_max(expected_class, functions_results):
-                    print('bad boy')
                     errors = True
                     punishment = self.COEFFICIENT * vector.transpose()
                     new_weights = self.functions_weights[expected_class] + punishment
@@ -31,10 +27,6 @@ class Perceptron:
                         if i != expected_class:
                             if functions_results[i] >= functions_results[expected_class]:
                                 self.functions_weights[i] = self.functions_weights[i] - punishment
-                else:
-                    print('good boy')
-                print(self.functions_weights)
-        print('Done!')
         print('Weights are: {}'.format(self.functions_weights))
 
     def get_class(self, vector):
