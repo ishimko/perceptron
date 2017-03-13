@@ -23,12 +23,19 @@ TRAIN_DATA = [
 TEST_COUNT = 40
 
 def get_test_vectors(count):
-    result = []*count
-    for i in range(count):
+    result = []
+    for _ in range(count):
         x = randrange(LEFT, RIGHT, H_STEP)
         y = randrange(BOTTOM, TOP, V_STEP)
-        result.append(list([x, y]))
+        result.append([x, y])
     return result
+
+
+def print_weights(weights):
+    print('Weights after training:')
+    for function_weights in weights:
+        print(*(map(int, function_weights)), sep=', ')
+
 
 if __name__ == '__main__':
     perceptron = Perceptron(CLASSES_COUNT, VECTOR_SIZE)
@@ -41,3 +48,4 @@ if __name__ == '__main__':
     for test_vector in test_vectors:
         result[perceptron.get_class(test_vector)].append(test_vector)
     display_result(result)
+    print_weights(perceptron.functions_weights)

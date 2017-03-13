@@ -27,7 +27,6 @@ class Perceptron:
                         if i != expected_class:
                             if functions_results[i] >= functions_results[expected_class]:
                                 self.functions_weights[i] = self.functions_weights[i] - punishment
-        print('Weights are: {}'.format(self.functions_weights))
 
     def get_class(self, vector):
         vector = np.matrix(self._add_bias(vector))
