@@ -33,12 +33,6 @@ class Perceptron:
         results = self._get_separating_functions_results(vector)
         return max(enumerate(results), key=lambda x: x[1])[0]
 
-    def save_weights(self):
-        pass
-
-    def load_weights(self):
-        pass
-
     def _add_bias(self, vector):
         return vector + [self.BIAS_VALUE]
 
