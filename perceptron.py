@@ -44,5 +44,5 @@ class Perceptron:
 
     def _is_true_max(self, expected_class, functions_results):
         expected_max = functions_results[expected_class]
-        others = [x for i, x in enumerate(functions_results) if i != expected_class]
-        return all([x < expected_max for x in others])
+        others = (x for i, x in enumerate(functions_results) if i != expected_class)
+        return all((x < expected_max for x in others))
